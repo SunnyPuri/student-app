@@ -1,0 +1,148 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        {{pageTitle}}
+    </div>
+
+    <div class="panel-body">
+        <form class="form-horizontal"
+              novalidate
+              (ngSubmit)="saveStudent()"
+              [formGroup]="studentForm" >
+            <fieldset>
+                <div class="form-group" 
+                     [ngClass]="{'has-error': displayMessage.firstName }">
+                    <label class="col-md-2 control-label" for="firstName">First Name*</label>
+
+                    <div class="col-md-8">
+                        <input class="form-control" 
+                                id="firstName" 
+                                type="text" 
+                                placeholder="First Name" 
+                                formControlName="firstName" />
+                        <span class="help-block" *ngIf="displayMessage.firstName">
+                                {{displayMessage.firstName}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group" 
+                     [ngClass]="{'has-error': displayMessage.lastName }">
+                    <label class="col-md-2 control-label" for="lastName">Last Name*</label>
+
+                    <div class="col-md-8">
+                        <input class="form-control" 
+                                id="lastName" 
+                                type="text" 
+                                placeholder="Last Name" 
+                                formControlName="lastName" />
+                        <span class="help-block" *ngIf="displayMessage.lastName">
+                                {{displayMessage.lastName}}
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="form-group"
+                    [ngClass]="{'has-error': displayMessage.email }">
+                    <label class="col-md-2 control-label" 
+                        for="email">Email*</label>
+
+                    <div class="col-md-8">
+                        <input class="form-control" 
+                               id="email" 
+                               type="email" 
+                               placeholder="Email" 
+                               formControlName = "email" />
+                        <span class="help-block" *ngIf="displayMessage.email">
+                                {{displayMessage.email}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group"
+                    [ngClass]="{'has-error': displayMessage.mobile }">
+                    <label class="col-md-2 control-label" 
+                        for="mobile">Mobile*</label>
+
+                    <div class="col-md-8">
+                        <input class="form-control" 
+                               id="mobile" 
+                               type="tel" 
+                               placeholder="Mobile" 
+                               formControlName = "mobile" />
+                        <span class="help-block" *ngIf="displayMessage.mobile">
+                                {{displayMessage.mobile}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group" >
+                    <label class="col-md-2 control-label">Gender*</label>
+                    <div class="col-md-8">
+                            <label class="radio-inline">
+                                <input type="radio" 
+                                       value="Male" 
+                                       formControlName = "gender">Male
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" 
+                                       value="Female" 
+                                       formControlName = "gender">Female
+                            </label>
+                    </div>
+                </div>
+
+                <div formArrayName="skills">
+                    <div class="row" style="padding-bottom: 5px;">
+                        <button class="col-md-offset-1 col-md-2 btn btn-default"
+                                type="button"
+                                (click)="addSkill()">Add Skills
+                        </button>
+                    </div>
+                    
+                    <div class="form-group"
+                        *ngFor="let skill of skills.controls; let i=index" >
+                        <label class="col-md-2 control-label" [attr.for]="i">Skill</label>
+
+                        <div class="col-md-8">
+                            <input class="form-control" 
+                                    [id]="i" 
+                                    type="text" 
+                                    placeholder="Skills" 
+                                    [formControlName]="i" />
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-2">
+                        <span>
+                            <button class="btn btn-primary"
+                                    type="submit"
+                                    style="width:80px;margin-right:10px"
+                                    [disabled]='!studentForm.valid'>
+                                Save
+                            </button>
+                        </span>
+                        <span>
+                            <a class="btn btn-default"
+                               style="width:80px"
+                               [routerLink]="['/students']">
+                                Cancel
+                            </a>
+                        </span>
+                        <span>
+                            <a class="btn btn-default"
+                               style="width:80px"
+                               (click)="deleteStudent()">
+                                Delete
+                            </a>
+                        </span>       
+                     </div>
+                </div>
+            </fieldset>
+        </form>
+        <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+    </div>
+
+</div>

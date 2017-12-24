@@ -1,0 +1,55 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{pageTitle}}
+    </div>
+
+    <div class='panel-body'>
+        <div class='row'>
+            <div class='col-md-3'>
+                <input type='text' class="form-control" [(ngModel)]='listFilter' placeholder="Search by First Name"/>
+            </div>
+        </div>
+        <div class='row' *ngIf='listFilter'>
+            <div class='col-md-6'>
+                <h4>Filtered by: {{listFilter}} </h4>
+            </div>
+        </div>
+
+        <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+
+        <div style="padding-top: 10px;">
+            <table class='table table-responsive table-bordered table-hover'
+                   *ngIf='students && students.length'>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Gender</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let student of students | studentFilter:listFilter'>
+                        
+                        <td><a [routerLink]="['/student', student.id]">
+                            {{student.firstName}}
+                            </a>
+                        </td>
+                        <td>{{ student.lastName }}</td>
+                        <td>{{ student.email  | lowercase}}</td>
+                        <td>{{ student.mobile }}</td>
+                        <td>{{ student.gender }}</td>
+                       <td>
+                            <a class="btn btn-primary" 
+                               [routerLink]="['/studentEdit', student.id]">
+                                <i class="glyphicon glyphicon glyphicon-edit"></i> Edit
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+
+<div id="wrapper" [ngClass]="{'toggled': sideBar }">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a [routerLink]="['/home']">
+                        Student App
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/home']">
+                         Home
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/students']">Student List</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/studentEdit/0']">Add Student</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row" style="padding-bottom: 10px;">
+                    <div class="col-md-12">
+                        <button (click)="toggleSideBar()" class="btn btn-default" id="menu-toggle">
+                            <i class="glyphicon glyphicon-menu-hamburger"></i> Menu
+                        </button>
+                    </div>       
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
